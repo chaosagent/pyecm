@@ -4,6 +4,8 @@ My (David Hou's) really basic implementation of ECM
 
 import random
 
+NCURVES = 200
+
 n = int(raw_input())
 
 def egcd(a, b):
@@ -58,7 +60,7 @@ def mult(x, y, f):
     return False, (x_w, y_w)
 
 try:
-    while n != 1:
+    while n != 1 and NCURVES != 0:
         a = random.randint(1, n - 1)
         x = random.randint(1, n - 1)
         y = random.randint(1, n - 1)
@@ -72,5 +74,7 @@ try:
                 n /= result
                 break
             x, y = result
+        NCURVES -= 1
+    if n != 1: print "Remaining factor: %d" % n
 except (KeyboardInterrupt, SystemExit):
         print "Remaining factor: %d" % n
