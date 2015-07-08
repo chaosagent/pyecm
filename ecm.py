@@ -24,13 +24,13 @@ def add(x_p, y_p, x_q, y_q):
     inv = modinv((x_q - x_p) % n, n)
     if not inv[0]:
         return True, inv[1]
-    l = ((y_q - y_p) * inv[1]) % n
+    l = (y_q - y_p) * inv[1]
     x_r = (l ** 2 - x_p - x_q) % n
     y_r = (l * (x_p - x_r) - y_p) % n
-    return False, (x_r, y_r)
+    return False, (x_r % n, y_r % n)
 
 def double(x, y):
-    inv = modinv(2 * y, n)
+    inv = modinv((2 * y) % n, n)
     if not inv[0]:
         return True, inv[1]
     l = 3 * x ** 2 * inv[1]
